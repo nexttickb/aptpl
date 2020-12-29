@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+	
+	<button style="width:200px;height:50px;font-size:20px" onclick="send()">测试</button>
+    <script>
+
+		class IoBuf{
+			constructor(addr) {
+				this.reqNum = 0;//请求序号0-999999
+				this.status = 0;//连接状态
+				this.hold = {};
+				this.addr = addr || 'ws://74.121.148.191:8001/';
+				this.connect();
+			}
+			getReq(){
+				this.reqNum = (this.reqNum >= 999999 ? 0 : this.reqNum + 1);
+				return this.reqNum;
+			}
+			connect(){
+				console.log('开始建立连接:', this.addr);
+				this.ws = new WebSocket(this.addr);
+				
+				this.ws.onopen = (e)=>{this.onOpen(e)};
+				this.ws.onclose = (e)=>{this.onClose(e)};
+				this.ws.onerror = (e)=>{this.onError(e)};
+				this.ws.onmessage = (e)=>{this.onMessage(e)};
+			}
+			onOpen(e){
+				this.status = 1;
+				console.log("连接服务器成功", this.status);
+			}
+			onClose(e){
+				this.status = -1;
+				console.log("服务器关闭");
+				this.retry();
+			}
+			onError(e){
+				this.status = -2;
+				console.log("连接出错");
+				this.retry();
+			}
+			retry(cbfunc){
+				if(this.status == 1)return;
+				console.log('尝试重新连接');
+				this.connect();
+				setTimeout(()=>{
+					this.retry();
+					if(typeof(cbfunc) == 'function')cbfunc.call(0, this.status);
+				}, 1000);
+			}
+			onMessage(e){
+		//		console.log(e.data);
+				let buf = JSON.parse(e.data);
+		//		console.log(buf.req, buf.data);//{req:111, code:0, data:''}
+				if(typeof(this.hold[buf.req]) == 'undefine'){
+					console.log('丢弃消息...', buf);
+					return;
+				}
+				let sub = this.hold[buf.req];
+				sub.cbfunc.call(0, buf.code, buf.data);
+				if(sub.mode == 1){
+					delete this.hold[buf.req];
+				}
+			}
+			send(data){
+				this.ws.send(data);
+			}
+			callApi(name, params, cbfunc, conf){
+				if(this.status <= 0){
+					this.retry((status)=>{
+						if(status <= 0){
+							cbfunc.call(0, -1, {});
+						}else{
+							callApi(name, params, cbfunc, conf);
+						}
+					});
+				}
+				conf = conf || {mode : 1, timeout: 10000};
+				let freeReq = this.getReq();
+				this.hold[freeReq] = {
+					timer : false,
+					mode : 1,
+					cbfunc : cbfunc
+				};
+				let buf = JSON.stringify({
+					req:freeReq,
+					name:name,
+					params:params
+				});
+				this.send(buf);
+			}
+            
+		}
+
+		var io = new IoBuf();
+		
+		function send(){
+			console.log('开始发送!');
+			io.callApi('https://www.baidu.com', {a:'', b:''}, (code, data)=>{
+				console.log('返回数据:', code, data);
+			});
+		}
+		
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
