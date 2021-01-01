@@ -1,27 +1,22 @@
 <template>
     <div class="my-body">
 		
-		<div style="box-sizing:border-box;padding:0.5rem;height:3.5rem;width:100%;background:#FF5722;color:#fff;display:flex;">
-			<div class="head-img" style=""></div>
-			<div class="user-info" style="font-size:0.9rem;margin-left:0.2rem">
-				<div class="flex:1">用户名:{{userInfo.id}}</div>
-				<div class="flex:1">等级:{{userInfo.level}}</div>
-			</div>
-			<div class="home-bar" style="width:2.5rem;height:2.5rem;">
-			</div>
-		</div>
+		<div style="height:5rem;background:#ccc;"></div>
 		
       	<div class="bg3" style="height:2rem;font-size:0.8rem;line-height:2rem;padding-left:0.2rem;display:flex;">
-			请选择充值话费额度
+			请选择提现额度
 		</div>
 	
 		<div class="menu-item bg4" style="flex:1;padding:0.5rem;overflow-y:scroll">
 			<div @click="buyProduct(item)" class="block" v-for="item in productList">
 				<div class="inner">
                 	<div style="">{{item.coinNumber}} </div>
-                	<div style="">支付{{item.amount}}</div>
 				</div>
             </div>
+		</div>
+		
+		<div class="" style="height:2rem;display:flex;">
+			<button @click="showPage('')" class="big-btn">确认提现</button>
 		</div>
 
         <div v-show="showPayDialog" :class="[showPayDialog?'bottom-dialog':'hide']" style="">
@@ -29,12 +24,11 @@
                 <div class="dialog-title" style="">选择支付方式<div class="btn-close" @click="cancelPay">×</div></div>
                 <div class="" style="line-height:0.8rem;font-size:0.7rem;">             
                     <p>总金额：{{buyProductInfo.amount}}</p>	
-                    <p>付款方式：</p>	
+                    <p>付款方式：</p>
 				</div>
 				<div>
-					<p><button class="btn big-btn" @click="doPay('wechat')">账户余额</button></p>	
-                    <p><button class="btn big-btn" @click="doPay('wechat')">ZALO PAY</button></p>	
-                    <p><button class="btn big-btn" @click="doPay('alipay')">MOMO PAY</button></p>	
+                    <p><button class="btn big-btn" @click="doPay('wechat')">微信支付</button></p>	
+                    <p><button class="btn big-btn" @click="doPay('alipay')">支付宝支付</button></p>	
                 </div>
             </div>        
         </div>
@@ -125,7 +119,7 @@ export default {
 <style lang="less">
     .block{
         float:left;
-        width: calc(calc(100% / 2) - 0px);
+        width: calc(calc(100% / 3) - 0px);
         height:4rem;
         box-sizing: border-box;
         text-align:center;
@@ -136,7 +130,7 @@ export default {
 			flex:1;
 			border:1px solid #ccc;
 			border-radius:0.3rem;
-			line-height:1.5rem;
+			line-height:2.5rem;
 		}
     }
 	.big-btn{

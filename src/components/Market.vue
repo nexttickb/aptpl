@@ -16,12 +16,12 @@
 				</Slide>
 		   </Swiper>
 
-			<Notices style="height:1.2rem;font-size:0.6rem;box-sizing: border-box;margin:0.2rem;"></Notices>
+			<Notices style="background:#fff;margin-top:0.2rem;height:1.2rem;font-size:0.6rem;box-sizing: border-box;margin:0.2rem;"></Notices>
 			
 			<div class="page-menu-1" style="">
 				<div style="" class="item" @click="showPage('')">
 					<div class="icon fa fa-layer-group" style=""></div>
-					<div class="text" style="">新闻公告</div>
+					<div class="text" style="">加盟代理</div>
 				</div>
 				<div style="" class="item" @click="showPage('')">
 					<div class="icon fa fa-link" style=""></div>
@@ -33,35 +33,16 @@
 				</div>
 			</div>
 			
-			
-			<div class="tasks-card1">
-				<div class="card-title">任务中心</div>
-				<div class="card-item" v-for="i in 6">
-					<div class="item-icon"></div>
-					<div class="item-content">
-						<div>Facebook</div>
-						<div>点赞+评论</div>
-					</div>
+			<div class="page-tab1" style="background:#fff;margin-top:0.2rem;width:100%;height:5rem;box-sizing:border-box;display:flex">
+				<div style="flex:1;margin:0.5rem;border-radius:0.3rem;line-height:3.6rem;text-align:center;background:#FFEB3B">
+					<h1><span>话费</span><span>充值</span></h1>
 				</div>
 			</div>
 			
-			<div class="tasks-card1">
-				<div class="card-title">任务中心</div>
-				<div class="card-item" v-for="i in 6">
-					<div class="item-icon"></div>
-					<div class="item-content">
-						<div>Facebook</div>
-						<div>点赞+评论</div>
-					</div>
-				</div>
+			<div class="page-tab1" style="background:#fff;margin-top:0.2rem;width:100%;height:2rem;box-sizing:border-box;padding-left:0.5rem;display:flex">
+				<div style="flex:1;text-align:left;line-height:2rem;">用户充值</div>
 			</div>
-			
-			
-			<div class="page-tab1" style="width:100%;height:2rem;display:flex">
-				<div style="flex:1;text-align:center;line-height:2rem;">任务完成榜</div>
-				<div style="flex:1;text-align:center;line-height:2rem;">任务发布榜</div>
-			</div>
-			<div style="padding-bottom:0.5rem;height:12rem;width:100%;overflow-y:scroll;">
+			<div style="background:#fff;margin-top:0.2rem;wpadding-bottom:0.5rem;height:12rem;width:100%;overflow-y:scroll;">
 				<div class="msg-list-item" style="height:3rem;display:flex;" v-for="item in agentList">
 					<div style='width:3rem;height:3rem;'>
 						<div style="width:3rem;height:3rem;display:flex;padding:0.3rem;box-sizing: border-box;">
@@ -225,8 +206,7 @@ export default {
 
 .page-menu-1{
 	height:2.5rem;display:flex;text-align:center;box-sizing: border-box;;
-	
-	color:#666;
+	color:#fff;
 	.item{
 		flex:1;
 		.icon{
@@ -237,6 +217,15 @@ export default {
 		}
 		&:active{
 		}
+	}
+	.item:nth-child(1){
+		background:#F44336;
+	}
+	.item:nth-child(2){
+		background:#8bc34a;
+	}
+	.item:nth-child(3){
+		background:#9c27b0;
 	}
 }
 
@@ -276,5 +265,76 @@ export default {
 	}
 
 }					
+
+
+
+
+
+
+h1 {
+  margin: 0;
+  padding: 0;
+  color: white;
+  text-shadow: 0 0.1em 20px black, 0.05em -0.03em 0 black, 0.05em 0.005em 0 black, 0em 0.08em 0 black, 0.05em 0.08em 0 black, 0px -0.03em 0 black, -0.03em -0.03em 0 black, -0.03em 0.08em 0 black, -0.03em 0 0 black;
+}
+h1 span {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  display: inline-block;
+}
+h1 span:first-child {
+  -webkit-animation: bop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
+          animation: bop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
+}
+h1 span:last-child {
+  -webkit-animation: bopB 1s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
+          animation: bopB 1s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
+}
+
+@-webkit-keyframes bop {
+  0% {
+    -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+  }
+  50%,
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes bop {
+  0% {
+    -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+  }
+  50%,
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@-webkit-keyframes bopB {
+  0% {
+    -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+  }
+  80%,
+  100% {
+    -webkit-transform: scale(1) rotateZ(-3deg);
+            transform: scale(1) rotateZ(-3deg);
+  }
+}
+@keyframes bopB {
+  0% {
+    -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+  }
+  80%,
+  100% {
+    -webkit-transform: scale(1) rotateZ(-3deg);
+            transform: scale(1) rotateZ(-3deg);
+  }
+}
 
 </style>

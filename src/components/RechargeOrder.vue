@@ -11,7 +11,7 @@
 	
 		<div class="menu-item bg4" style="">
 			<div class="card-item" v-for="item in agentList">
-				<div style="">充钻石:{{item.coinNumber}} <span class="text-id">到账:{{item.coinNumber * 1 + item.giveCoin * 1}}</span><span class="text-id">，支付方式:{{item.payMethod}}</span></div>
+				<div style="">充话费:{{item.coinNumber}} <span class="text-id">到账:{{item.coinNumber * 1 + item.giveCoin * 1}}</span><span class="text-id">，支付方式:{{item.payMethod}}</span></div>
 				<div style="">充值时间: {{item.dateTime}}</div>
 			</div>
 			
@@ -49,7 +49,7 @@ export default {
 			
 			if('showPage' == res.type){
 				if(res.data.name == 'RechargeOrder'){
-					this.getList();
+			//		this.getList();
 				}
 			}
 		});

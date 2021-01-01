@@ -4,17 +4,13 @@
 		<div class="icon fa fa-layer-group" style=""></div>
 		<div class="text" style="">首页</div>
 	</div>
-	<div style="" class="item" @click="showPage('TaskList')"  :class="['item', nowSelect=='TaskList'?'active':'default']">
+	<div style="" class="item" @click="showPage('Recharge')"  :class="['item', nowSelect=='Recharge'?'active':'default']">
 		<div class="icon fa fa-link" style=""></div>
 		<div class="text" style="">任务</div>
 	</div>
 	<div style="" class="item" @click="showPage('Vip')" :class="['item', nowSelect=='Vip'?'active':'default']">
 		<div class="icon fa fa-user-circle" style=""></div>
 		<div class="text" style="">VIP</div>
-	</div>
-	<div style="" class="item" @click="showPage('Active')" :class="['item', nowSelect=='Active'?'active':'default']">
-		<div class="icon fa fa-user-circle" style=""></div>
-		<div class="text" style="">活动</div>
 	</div>
 	<div style="" class="item" @click="showPage('UserInfo')" :class="['item', nowSelect=='UserInfo'?'active':'default']">
 		<div class="icon fa fa-user-circle" style=""></div>
@@ -58,6 +54,7 @@ export default {
 <style lang='less'>
 
 .bottom-menu{
+background:#fff;
 	height:2.5rem;display:flex;text-align:center;box-sizing: border-box;;
 	color:#666;
 	border-top:1px solid #ccc;
